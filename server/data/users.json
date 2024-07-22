@@ -1,0 +1,17 @@
+{
+    "35c62d76-8152-4626-8712-eeb96381bea8": {
+        "name":"Pesho",
+        "email": "peter@abv.bg",
+        "password": "pesho123"
+    },
+    "847ec027-f659-4086-8032-5173e2f9c93a": {
+        "name":"Gosho",
+        "email": "george@abv.bg",
+        "password": "824436eb1"
+    },
+    "60f0cf0b-34b0-4abd-9769-8c42f830dffc": {
+        "name":"Admin",
+        "email": "admin@abv.bg",
+        "password": "da302fk"
+    }
+}
