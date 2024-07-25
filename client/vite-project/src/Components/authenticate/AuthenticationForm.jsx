@@ -1,7 +1,7 @@
 
-import React, { useEffect, useState } from 'react';
- 
- 
+import React, { useEffect, useState,useContext  } from 'react';
+import UserContext from '../../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function AuthenticationForm({url}) {
     const [isSignUp, setSignUp] = useState(false)
@@ -11,7 +11,9 @@ export default function AuthenticationForm({url}) {
     const [emailNotFound,setEmailNotFound] = useState(false)
     const [passDontMatch,setPassDontMatch] = useState(false)
     const [render,setRender] = useState(false)
-    
+    const {user , setUser } = useContext(UserContext);
+    const navigate = useNavigate();
+
     const [signInData, setsignInData] = useState({
         email: '',
         password: ''
@@ -102,11 +104,18 @@ export default function AuthenticationForm({url}) {
             setEmailNotFound(false)
             if (emailStatus[0][1]["password"]!==signInData['password']){
                 setPassDontMatch(true)
+                console.log("DONT MATCH");
+
                 signInData['password']=''
                 setRender(!render)
-            }else
+            }else{
                 setPassDontMatch(false)
-
+                console.log("LOGGED");
+                setUser(emailStatus[0]);
+                console.log(user)
+                navigate('/')
+            }
+               
         }
 
     }
