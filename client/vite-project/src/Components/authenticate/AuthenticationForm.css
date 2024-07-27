@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 * {
@@ -37,7 +38,7 @@ p {
 }
 form p {
 	margin: 0px;
-	color: #FF416C;
+	color: #9341ff;
 }
 
 span {
@@ -51,10 +52,10 @@ a {
 	margin: 15px 0;
 }
 
-.container button {
+.scope button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #6e2bff;
+	background-color: #7228da;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -72,7 +73,7 @@ button:focus {
 	outline: none;
 }
 
-button.ghost {
+.scope button.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
 }
@@ -168,9 +169,9 @@ input {
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background: rgba(145, 72, 255, 0.5);;
+	background: -webkit-linear-gradient(to right, rgba(146, 59, 246, 0.5), rgba(146, 59, 246, 0.5));
+	background: linear-gradient(to right, rgba(90, 59, 246, 0.5), rgba(84, 59, 246, 0.5));
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -233,7 +234,9 @@ input {
 	height: 40px;
 	width: 40px;
 }
-
+.dropdownAvatarNameButton{
+	border: none;
+}
 /* footer {
     background-color: #222;
     color: #fff;

@@ -1,3 +1,5 @@
+
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Space+Mono:wght@400;700&display=swap");
 *, *:after, *:before {
@@ -7,11 +9,11 @@
 :root {
   --c-text-primary: #162121;
   --c-text-secondary: #6D7680;
-  --c-action-primary: #F29873;
-  --c-action-primary-accent: #FAF5F1;
+  --c-action-primary: #b755ec;
+  --c-action-primary-accent: #f4f1f7;
   --c-action-secondary: #63C4B1;
-  --c-action-tertiary: #F9BE31;
-  --c-bg-primary: #FCFCFC;
+  --c-action-tertiary: #a923fc;
+  --c-bg-primary: #fffeff;
   --c-bg-secondary: #F7F6FC;
   --c-bg-search: #F0F4F5;
 }
@@ -107,12 +109,22 @@ img {
   margin-left: 1rem;
 }
 
-.header-avatar-img {
+.header-avatar-span {
   display: block;
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
   background-image: url("https://assets.codepen.io/285131/user-avatar.jpg");
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header-avatar-img {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -288,7 +300,7 @@ img {
   justify-content: space-between;
 }
 .list .list-item:last-child {
-  border-bottom: 1px solid #dedede;
+  border-bottom: 1px solid #f22929;
 }
 
 .list-item-company {
@@ -382,3 +394,33 @@ img {
   overflow-y: auto;  
   overflow-x: hidden;  
 }
+.SigninSignup-btn{
+  color: #e0b1fd;
+  font-weight: bold
+}
+:hover.SigninSignup-btn{
+  color: #d08ef9;
+  transition: 0.5s;
+  text-decoration: underline;
+}
+.ph {
+  font-size: 34px;
+  height: 20px;
+  width: 20px;
+
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}  
+/* Change icon color */
+ .controls{
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  margin-right: 50px;
+ }
+ .project-title{
+  align-self: center;
+  justify-self: center;
+ }
