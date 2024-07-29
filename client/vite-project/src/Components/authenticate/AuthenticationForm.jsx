@@ -122,9 +122,9 @@ export default function AuthenticationForm({url}) {
     return (
 
         <div className={isSignUp ?
-            'container right-panel-active' :
-            'container'} id="container">
-            <div className="form-container sign-up-container">
+            'container scope right-panel-active' :
+            'container scope'} id="container">
+            <div className="form-container  sign-up-container">
                 <form onSubmit={onSignUpSubmit}>
                     <h1>Create Account</h1>
                     <div className="social-container">
