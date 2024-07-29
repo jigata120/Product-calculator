@@ -4,7 +4,7 @@ import NotFoundPage from "../NotFoundPage";
 import Transactions from "./ProductCalculatorPAGES/Transactions";
 import Subscriptions from "./ProductCalculatorPAGES/Subscriptions";
 import style from "./ProductCalculator.jsx"
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import UserContext from '../../contexts/UserContext';
 import Wellcome from "./ProductCalculatorPAGES/Wellcome.jsx";
 import Profile from "./ProductCalculatorPAGES/profile/Profile.jsx";
@@ -20,6 +20,16 @@ export default function ProductCalculator(){
     console.log(user);
     const navigate = useNavigate(); 
 
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const toggleDropdown = () => {
+      setIsDropdownOpen((prev) => !prev);
+    };
+    function handleSignOut(){
+        setUser({})
+        navigate("/authentication")
+    }
     return(
         <>
             {/* partial:index.partial.html */}
@@ -34,26 +44,103 @@ export default function ProductCalculator(){
                         <i className="ph-magnifying-glass-bold" />
                     </button>
                     </div>
-                    
-                    <button className="header-avatar">
+                    <div className="relative">
+      
+
+                        {isDropdownOpen && (
+                            <div
+                            id="dropdownAvatarName"
+                            className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+                            >
+                            <Link to={`/user/${user[0]}`}>
+                                <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                    <div className="font-medium">Pro User</div>
+                                    <div className="truncate">name@flowbite.com</div>
+                                </div>
+                            </Link>
+                            <ul
+                                className=" text-sm text-gray-700 dark:text-gray-200"
+                                aria-labelledby="dropdownAvatarNameButton"
+                            >
+                                <li>
+                                <a 
+                                    onClick={toggleDropdown}
+                                    href="#"
+                                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200"
+                                >
+                                    Dashboard
+                                </a>
+                                </li>
+                                <li>
+                                <a
+                                    href="#"
+                                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200"
+                                >
+                                    Settings
+                                </a>
+                                </li>
+                                 
+                            </ul>
+                            <div onClick={handleSignOut}className="py-1">
+                                <a
+                                href="#"
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                >
+                                Sign out
+                                </a>
+                            </div>
+                            </div>
+                        )}
+                        </div>
+                   <button className="header-avatar">
                     
                     {user && user.length > 0 ? (
                         <>
-                            {user[1]?.profileUrl ? (
-                            <Link to={`/user/${user[0]}`}>
+                            <button
+                                id="dropdownAvatarNameButton"
+                                onClick={toggleDropdown}
+                                className="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full hover:text-purple-600 dark:hover:text-purple-500 md:me-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-dark"
+                                type="button"
+                            >
+                                <span className="sr-only">Open user menu</span>
+                                {user[1]?.profileUrl ? (
+                            
                                 <img
-                                className="header-avatar-img"
+                                className="mx-4 header-avatar-img"
                                 src={user[1]?.profileUrl}
                                 alt="Profile photo"
                                 />
-                            </Link>
+                             
                             ) : (
-                            <Link to={`/user/${user[0]}`} className="header-avatar-span">
-                                <span className="header-avatar-span"></span>
-                            </Link>
+                            
+                                <img
+                                className="header-avatar-img"
+                                src="https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg"
+                                alt="Profile photo"
+                                />
+                             
                             )}
+
+                                {user[1]?.name}
+                                <svg
+                                className="w-2.5 h-2.5 ms-3"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 10 6"
+                                >
+                                <path
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="m1 1 4 4 4-4"
+                                />
+                                </svg>
+                            </button>
+                           
                             <Link to={`/user/${user[0]}`} className="header-avatar-name">
-                            {user[1]?.name}
+                            
                             </Link>
                         </>
                         ) : (
