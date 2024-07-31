@@ -36,18 +36,30 @@ export default function Profile({
         <div className="card-container">
           {profilData.role=='admin'?
           <span className="pro">ADMIN</span>
-          :<span style={{backgroundColor:'#03BFCB'}}className="pro">W</span>
+          :<span style={{backgroundColor:'#03BFCB',zIndex:5}}className="pro">W</span>
 
           }
-        <img
-          className="round"
-          src={profilData?.profileUrl}
-          alt="user"
-        />
+        {profilData?.profileUrl ? (
+            
+            <img
+            className="round"
+            src={profilData?.profileUrl}
+            alt="Profile photo"
+            />
+          
+        ) : (
+        
+            <img
+            className="round"
+            src="https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg"
+            alt="Profile photo"
+            />
+          
+        )}
         <h3>{profilData?.name}</h3>
         <h6>New York</h6>
         <h4>{profilData?.email}</h4>
-
+          
         {/* <p>
           User interface designer and <br /> front-end developer
         </p> */}
