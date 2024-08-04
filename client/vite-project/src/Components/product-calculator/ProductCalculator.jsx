@@ -4,12 +4,13 @@ import NotFoundPage from "../NotFoundPage";
 import Transactions from "./ProductCalculatorPAGES/Transactions";
 import Subscriptions from "./ProductCalculatorPAGES/Subscriptions";
 import style from "./ProductCalculator.jsx"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from '../../contexts/UserContext';
 import Wellcome from "./ProductCalculatorPAGES/Wellcome.jsx";
 import Profile from "./ProductCalculatorPAGES/profile/Profile.jsx";
 import Accounts from "./ProductCalculatorPAGES/Accounts.jsx";
 import Projects from "./ProductCalculatorPAGES/Projects.jsx";
+import {   fetchDataWithToken,   logoutUser } from "../../auth.js";
 
 
 
@@ -20,15 +21,40 @@ export default function ProductCalculator(){
     console.log(user);
     const navigate = useNavigate(); 
 
-
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);   
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    useEffect(()=>{
+        const fetchUserData = async () => {
+            console.log(localStorage.getItem('access_token'));
+            console.log(localStorage.getItem('refresh_token'));
+
+            try {
+              const AccessToken = localStorage.getItem('access');  
+              if (AccessToken){
+                const data = await fetchDataWithToken();
+                setUser(data);              
+              }
+            } catch (err) {
+              setError(err.message);
+            } finally {
+              setLoading(false);
+            }
+        }
+        fetchUserData();
+    },[])
 
     const toggleDropdown = () => {
       setIsDropdownOpen((prev) => !prev);
+      
     };
+
     function handleSignOut(){
-        setUser({})
+        logoutUser()
+        setLoading(!loading)
         navigate("/authentication")
+        
     }
     return(
         <>
@@ -52,10 +78,10 @@ export default function ProductCalculator(){
                             id="dropdownAvatarName"
                             className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
                             >
-                            <Link to={`/user/${user[0]}`}>
+                            <Link to={`/user/${user.id}`}>
                                 <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                                    <div className="font-medium">Pro User</div>
-                                    <div className="truncate">name@flowbite.com</div>
+                                    <div className="font-medium text-center">{user.name}</div>
+                                    <div className="truncate">{user.email} </div>
                                 </div>
                             </Link>
                             <ul
@@ -64,16 +90,17 @@ export default function ProductCalculator(){
                             >
                                 <li>
                                 <a 
-                                    onClick={toggleDropdown}
-                                    href="#"
+                                    onClick={ toggleDropdown}
+                                     
+                                     
                                     className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200"
                                 >
-                                    Dashboard
+                                    Close
                                 </a>
                                 </li>
                                 <li>
                                 <a
-                                    href="#"
+                                     
                                     className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200"
                                 >
                                     Settings
@@ -83,7 +110,7 @@ export default function ProductCalculator(){
                             </ul>
                             <div onClick={handleSignOut}className="py-1">
                                 <a
-                                href="#"
+                                 
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                 >
                                 Sign out
@@ -92,9 +119,9 @@ export default function ProductCalculator(){
                             </div>
                         )}
                         </div>
-                   <button className="header-avatar">
-                    
-                    {user && user.length > 0 ? (
+                   <span className="header-avatar">
+                     
+                    {user.id ? (
                         <>
                             <button
                                 id="dropdownAvatarNameButton"
@@ -103,11 +130,11 @@ export default function ProductCalculator(){
                                 type="button"
                             >
                                 <span className="sr-only">Open user menu</span>
-                                {user[1]?.profileUrl ? (
+                                {user?.profileUrl ? (
                             
                                 <img
                                 className="mx-4 header-avatar-img"
-                                src={user[1]?.profileUrl}
+                                src={user?.profileUrl}
                                 alt="Profile photo"
                                 />
                              
@@ -121,7 +148,7 @@ export default function ProductCalculator(){
                              
                             )}
 
-                                {user[1]?.name}
+                                {user?.name}
                                 <svg
                                 className="w-2.5 h-2.5 ms-3"
                                 aria-hidden="true"
@@ -139,7 +166,7 @@ export default function ProductCalculator(){
                                 </svg>
                             </button>
                            
-                            <Link to={`/user/${user[0]}`} className="header-avatar-name">
+                            <Link to={`/user/${user.id}`} className="header-avatar-name">
                             
                             </Link>
                         </>
@@ -147,7 +174,7 @@ export default function ProductCalculator(){
                         <Link to="/authentication" className="SigninSignup-btn">Sign Up/Sign In</Link>
                         )}
                    
-                   </button>
+                   </span>
                 </div>
                 </header>
                 <main className="main">
@@ -200,7 +227,7 @@ export default function ProductCalculator(){
                         <Route path='projects' element={<Projects/>}/>
                         <Route path='accounts' element={<Accounts/>}/>
                         <Route path='subscriptions' element={<Subscriptions/>}/>
-                        <Route path='' element={<Wellcome name= {user[1]?.name}/>}/>
+                        <Route path='' element={<Wellcome name= {user?.name}/>}/>
                         <Route path='user/:userId' element={<Profile user={user}/>}/>
                         
 
