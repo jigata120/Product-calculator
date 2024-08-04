@@ -14,7 +14,7 @@ export default function Profile({
             setProfilData(user[1])
         }else{
             (async ()=>{
-                const response = await fetch(`http://localhost:3030/jsonstore/users/${userId}`)
+                const response = await fetch(`http://localhost:8000/api/users/${userId}`)
                 if (!response.ok) {
                   navigate('/NotFound')
                 console.log("navigated")
