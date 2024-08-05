@@ -2,14 +2,24 @@
 import React, { useEffect, useState,useContext  } from 'react';
 import UserContext from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { getData, postData } from '../../Api';
+import {  loginUser } from '../../auth';
 
 export default function AuthenticationForm({url}) {
+     
+    
     const [isSignUp, setSignUp] = useState(false)
     const [users,setUsers] = useState({})
     const [usedName,setUsedName] = useState(false)
     const [usedEmail,setUsedEmail] = useState(false)
     const [emailNotFound,setEmailNotFound] = useState(false)
     const [passDontMatch,setPassDontMatch] = useState(false)
+    const [passValidation,setPassValidation] = useState({})
+    const [emailValidation,setEmailValidation] = useState({})
+    const [nameValidation,setNameValidation] = useState({})
+    const [fillInfo,setFillInfo] = useState(false)
+
+
     const [render,setRender] = useState(false)
     const {user , setUser } = useContext(UserContext);
     const navigate = useNavigate();
@@ -21,28 +31,137 @@ export default function AuthenticationForm({url}) {
     const [signUpData, setsignUpData] = useState({
         name: '',
         email: '',
-        password: ''
+        password: '',
+        profile_url:"https://example.com/profile.jpg",
+        role:"worker"
+
+
 
     })
 
     useEffect(()=>{
-        async function getUsers(){
-            const response = await fetch(`${url}/users`);
-            const data = await response.json()
-            console.log(data)
-            return data
-        }
+        
         (async function Resolve (){ 
-            const Users = await getUsers()
+            const Users = await getData(url)
             console.log(Users)
             setUsers(Users)
         })()
+        console.log(users);
+        
     },[])
 
-
+    function validatePassword(password) {
+        const minLength = 8;
+        const uppercasePattern = /[A-Z]/;
+        const lowercasePattern = /[a-z]/;
+        const digitPattern = /[0-9]/;
+        const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+    
+        if (password.length < minLength) {
+            return {
+                isValid: false,
+                message: `Password must be at least ${minLength} characters long.`
+            };
+        }
+        if (!uppercasePattern.test(password)) {
+            return {
+                isValid: false,
+                message: "Password must contain at least one uppercase letter."
+            };
+        }
+        if (!lowercasePattern.test(password)) {
+            return {
+                isValid: false,
+                message: "Password must contain at least one lowercase letter."
+            };
+        }
+        if (!digitPattern.test(password)) {
+            return {
+                isValid: false,
+                message: "Password must contain at least one digit."
+            };
+        }
+        if (!specialCharPattern.test(password)) {
+            return {
+                isValid: false,
+                message: "Password must contain at least one special character."
+            };
+        }
+    
+        return {
+            isValid: true,
+            message: "Password is valid."
+        };
+    }
+    function validateEmail(email) {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const forbiddenCharactersPattern = /[<>,;{}()\\\[\]`~!#$%^&*|+=?]/;
+        const domainPattern = /^[^\s@]+\.[^\s@]+$/;
+    
+        if (email.length === 0) {
+            return {
+                isValid: false,
+                message: "Email address cannot be empty."
+            };
+        }
+        if (!emailPattern.test(email)) {
+            return {
+                isValid: false,
+                message: "Email address is not in a valid format."
+            };
+        }
+        if (forbiddenCharactersPattern.test(email)) {
+            return {
+                isValid: false,
+                message: "Email address contains forbidden characters."
+            };
+        }
+        const domainPart = email.split('@')[1];
+        if (!domainPattern.test(domainPart)) {
+            return {
+                isValid: false,
+                message: "Email domain is not valid."
+            };
+        }
+    
+        return {
+            isValid: true,
+            message: "Email address is valid."
+        };
+    }
+    function validateUsername(username) {
+        if (username.length === 0) {
+            return {
+                isValid: false,
+                message: "Username cannot be empty."
+            };
+        }
+        if (username.length <= 2) {
+            return {
+                isValid: false,
+                message: "Username must be more than 2 characters long."
+            };
+        }
+    
+        return {
+            isValid: true,
+            message: "Username is valid."
+        };
+    }
     function onSignUpInput(e) {
         const newValue = e.target.value.trim()
         const Elname = e.target.name
+        if (Elname =="password"){
+           const validation = validatePassword(newValue)
+           setPassValidation(validation)
+        }else if (Elname =="email"){
+            const validation = validateEmail(newValue)
+            setEmailValidation(validation)
+ 
+        }else if (Elname =="name"){
+            const validation = validateUsername(newValue)
+            setNameValidation(validation)
+        }    
         setsignUpData(
             oldData => ({
                 ...oldData,
@@ -69,23 +188,40 @@ export default function AuthenticationForm({url}) {
 
     function onSignUpSubmit(e) {
         e.preventDefault()
+        console.log(`III ${!usedName},${!usedEmail},${passValidation.isValid}`);
         let nameStatus = Object.entries(users)
         .filter(user => user[1]['name'].toLowerCase() === signUpData['name'].toLowerCase());
         if (nameStatus.length !== 0){
             console.log(nameStatus);
-            setUsedName(true)
+            setUsedName(usedEmail => true)
         }else{
-            setUsedName(false)
+            setUsedName(usedEmail => false)
         }
 
         let emailStatus = Object.entries(users)
         .filter(user => user[1]['email'].toLowerCase() === signUpData['email'].toLowerCase());
+        console.log(emailStatus);
         if (emailStatus.length !== 0){
             console.log(emailStatus);
-            setUsedEmail(true)
+            setUsedEmail(usedName => true)
         }else{
-            setUsedEmail(false)
-        }    
+            setUsedEmail(usedName => false)
+        } 
+        console.log(`${!usedName},${!usedEmail},${passValidation.isValid}`);
+        if (emailStatus.length == 0 &&
+             nameStatus.length == 0 &&
+             passValidation.isValid && 
+             emailValidation.isValid &&
+             nameValidation.isValid){
+            console.log(` CREATION${signUpData}`);
+            console.log(signUpData);
+            (async function RegisterUser(){
+                const postRequest = await postData(url,signUpData)
+            })()
+            navigate('/')
+        }else{
+            setFillInfo(true)
+        }
     }
 
 
@@ -95,6 +231,16 @@ export default function AuthenticationForm({url}) {
         
         let emailStatus = Object.entries(users)
         .filter(user => user[1]['email'].toLowerCase() === signInData['email'].toLowerCase());
+        console.log(emailStatus);
+        (async function auth() {
+            try {
+                await loginUser(signInData.email, signInData.password);
+                console.log("AUTH");
+                navigate('/')   
+            } catch (error) {
+                console.log(error);
+            }
+        })()
         if (emailStatus.length == 0){
             setEmailNotFound(true)
             signInData['password']=''
@@ -113,7 +259,7 @@ export default function AuthenticationForm({url}) {
                 console.log("LOGGED");
                 setUser(emailStatus[0]);
                 console.log(user)
-                navigate('/')
+                
             }
                
         }
@@ -140,17 +286,24 @@ export default function AuthenticationForm({url}) {
                         onChange={onSignUpInput}
                     />
                     {usedName&&<p>This name is not available!</p>}
+                    {!nameValidation.isValid&&<p>{nameValidation.message}</p>}
+                   
                     <input type=" " placeholder="Email"
                         name="email"
                         value={signUpData.email}
                         onChange={onSignUpInput}
                     />
                     {usedEmail&&<p>This email is already used!</p>}
+                    {!emailValidation.isValid&&<p>{emailValidation.message}</p>}
+                   
                     <input type="password" placeholder="Password"
                         name="password"
                         value={signUpData.password}
                         onChange={onSignUpInput}
                     />
+                    {!passValidation.isValid&&<p>{passValidation.message}</p>}
+                    {fillInfo&&<p>Please fill all fields correctly</p>}
+                    
                     <button>Sign Up</button>
                 </form>
             </div>
