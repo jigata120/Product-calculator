@@ -9,8 +9,10 @@ import UserContext from '../../contexts/UserContext';
 import Wellcome from "./ProductCalculatorPAGES/Wellcome.jsx";
 import Profile from "./ProductCalculatorPAGES/profile/Profile.jsx";
 import Accounts from "./ProductCalculatorPAGES/Accounts.jsx";
-import Projects from "./ProductCalculatorPAGES/Projects.jsx";
+ 
 import {   fetchDataWithToken,   logoutUser } from "../../auth.js";
+import Projects from "./projects/Projects.jsx";
+import ProjectDetails from "./projects/project/Project.jsx";
 
 
 
@@ -199,7 +201,7 @@ export default function ProductCalculator(){
                         <NavLink to="projects" 
                         className={({ isActive })=> (isActive ? "tab-btn tab-btn--active" : "tab-btn")}>
                          <i className="ph-credit-card-bold" />
-                        <span className="tab-btn-title">Bugdets</span>
+                        <span className="tab-btn-title">Projects</span>
                         </NavLink>
                     </li>
                     <li className="tab">
@@ -229,10 +231,12 @@ export default function ProductCalculator(){
                         <Route path='subscriptions' element={<Subscriptions/>}/>
                         <Route path='' element={<Wellcome name= {user?.name}/>}/>
                         <Route path='user/:userId' element={<Profile user={user}/>}/>
+                        <Route path='projects/user/:userId' element={<Profile user={user}/>}/>
+                        <Route path='projects/:projectId' element={<ProjectDetails/>}/>
                         
 
 
-
+                        
                     </Routes>
                 </div>
                 </main>
