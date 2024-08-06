@@ -87,3 +87,57 @@ export async function deleteData(url) {
         throw error; 
     }
 }
+
+
+
+import axios from 'axios';
+
+const BASE_URL = 'http://localhost:8000/api';
+
+const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+});
+
+
+ 
+
+const createAuthenticatedAxiosInstance = () => {
+  const accessToken = localStorage.getItem('access');
+  return axios.create({
+    baseURL: BASE_URL,
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+export { axiosInstance, createAuthenticatedAxiosInstance };
+
+export async function refreshTokenFunc( ) {
+    let refreshToken =localStorage.getItem('refresh')
+
+    const response = await fetch('http://localhost:8000/api/token/refresh/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ refresh: refreshToken }),
+    });
+  
+    if (response.ok) {
+      const data = await response.json();
+      // Save new access token and refresh token if applicable
+      localStorage.setItem('access', data.access);
+      localStorage.setItem('refresh', data.refresh);
+      return data;
+    } else {
+      throw new Error('Unable to refresh token');
+    }
+  }
+  
