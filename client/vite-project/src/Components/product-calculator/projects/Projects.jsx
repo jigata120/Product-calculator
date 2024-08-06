@@ -45,11 +45,14 @@ export default function Projects() {
                 <svg className={styles.card__arc} xmlns="http://www.w3.org/2000/svg">
                     <path />
                 </svg>
+                <Link to={`user/${project.owner.id}`} >
+                   
                 <img
                     className={styles.card__thumb}
                     src={project.owner.profile_url}
                     alt=""
                 />
+                </Link>
                 <div className={styles.card__header_text}>
                     <h3 className={styles.card__title}>{project.title} by {project.owner.name}</h3>
                     <span className={styles.card__status}>1 hour ago</span>
