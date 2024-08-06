@@ -39,11 +39,11 @@ export default function Profile({
           :<span style={{backgroundColor:'#03BFCB',zIndex:5}}className="pro">W</span>
 
           }
-        {profilData?.profileUrl ? (
+        {profilData?.profile_url ? (
             
             <img
             className="round"
-            src={profilData?.profileUrl}
+            src={profilData?.profile_url}
             alt="Profile photo"
             />
           
