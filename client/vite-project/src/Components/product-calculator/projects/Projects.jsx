@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import styles from './projects.module.css';
 import { getData } from "../../../Api"
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import ProjectDetails from "./project/Project";
-
+import UserContext from "../../../contexts/UserContext";
  
 
  
@@ -11,6 +11,7 @@ import ProjectDetails from "./project/Project";
 export default function Projects() {
     
     const BASEURL = 'http://localhost:8000/api/projects/'
+    const { user, setUser } = useContext(UserContext);
     
 
 	const [table,setTable] = useState([])
@@ -19,7 +20,7 @@ export default function Projects() {
             const data = await getData(BASEURL)
             setTable(table => data)
             
-        })()
+        })() 
         
     },[])
     console.log(table);
@@ -33,13 +34,23 @@ export default function Projects() {
         
         <li key={project.id}>
             <span   className={styles.card}>
-            <Link to={`/projects/${project.id}`}>
-            <img
-                src={project?.picture_url}
-                className={styles.card__image}
-                alt=""
-            />
-            </Link>
+           {user.id?
+          ( <Link to={`/projects/${project.id}`}>
+           <img
+               src={project?.picture_url}
+               className={styles.card__image}
+               alt=""
+           /></Link>)
+           :
+           ( <Link to={`/authentication`}>
+           <img
+               src={project?.picture_url}
+               className={styles.card__image}
+               alt=""
+           /></Link>)
+           }     
+            
+            
             <div className={styles.card__overlay}>
                 <div className={styles.card__header}>
                 <svg className={styles.card__arc} xmlns="http://www.w3.org/2000/svg">
