@@ -4,6 +4,7 @@ import { getData } from "../../../Api"
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import ProjectDetails from "./project/Project";
 import UserContext from "../../../contexts/UserContext";
+import CreateProjectModal from "./project/modals/CreateProject";
  
 
  
@@ -13,8 +14,9 @@ export default function Projects() {
     const BASEURL = 'http://localhost:8000/api/projects/'
     const { user, setUser } = useContext(UserContext);
     
-
+    const [createModal,closeModalCreate]=useState(false)
 	const [table,setTable] = useState([])
+    const[refreshProjects,setRefreshProjects] = useState(false)
     useEffect(()=>{
         (async ()=>{
             const data = await getData(BASEURL)
@@ -23,6 +25,14 @@ export default function Projects() {
         })() 
         
     },[])
+    useEffect(()=>{
+        (async ()=>{
+            const data = await getData(BASEURL)
+            setTable(table => data)
+            
+        })() 
+        
+    },[refreshProjects])
     console.log(table);
     const handleMemberClicked = (id)=>{
         const navigate = useNavigate();
@@ -34,7 +44,7 @@ export default function Projects() {
         
         <li key={project.id}>
             <span   className={styles.card}>
-           {user.id?
+           {user.id||true?
           ( <Link to={`/projects/${project.id}`}>
            <img
                src={project?.picture_url}
@@ -92,9 +102,22 @@ export default function Projects() {
             </div>
             </span>
         </li>))
+        const  handleCreateModal=()=>{
+            closeModalCreate(true)
+        }
 	return(
         <>
-          
+        <span  
+            onClick={handleCreateModal}
+            className="px-3 py-1 ml-3 font-semibold rounded-md dark:bg-violet-300 dark:text-gray-50 self-right
+            over:bg-pink-200 active:bg-pink-100 focus:outline-none focus:ring focus:ring-pink-300">
+                <span>Create New Project +</span>
+        </span>
+          {createModal && <CreateProjectModal 
+          refreshProjects={refreshProjects}
+           setRefreshProjects={setRefreshProjects}
+          closeModalCreate={closeModalCreate}
+          />}
         <ul className={styles.cards}>
             {ProjectsHtml}
              
