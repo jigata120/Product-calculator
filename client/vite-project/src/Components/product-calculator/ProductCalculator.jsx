@@ -123,7 +123,7 @@ export default function ProductCalculator(){
                         </div>
                    <span className="header-avatar">
                      
-                    {user.id ? (
+                    {user.id? (
                         <>
                             <button
                                 id="dropdownAvatarNameButton"
