@@ -14,11 +14,7 @@ export default function CreateProjectModal({refreshProjects,setRefreshProjects, 
     const [newProject, setNewProjectData] = useState({});
     const { user, setUser } = useContext(UserContext);
     const [members, setMembers] = useState([]);  
-    const [owner] = useState({
-        id: "a5475db8-cb87-4d5c-882c-93c5382fdd5f",
-        name: "PolYa",
-        profile_url: "https://www.shutterstock.com/image-photo/portrait-beautiful-young-woman-over-260nw-419163175.jpg"
-    });  
+    const [owner] = useState(user);  
     const isValidUrl = (url) => {
         try {
             const parsedUrl = new URL(url);
