@@ -3,10 +3,10 @@ name: Build and Deploy to Render
 on:
   push:
     branches:
-      - main  # Deploy when changes are pushed to the main branch
+      - main  
   pull_request:
     branches:
-      - main  # Optionally, run on pull requests to main
+      - main   
 
 jobs:
   build:
@@ -16,23 +16,42 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Change to project directory
-        run: cd client/vite-project
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Use the version of Node.js that you need
+          node-version: '20'  
 
       - name: Install dependencies
         run: npm install
+        working-directory: client/vite-project  
 
       - name: Build the app
         run: npm run build
+        working-directory: client/vite-project  
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: client/vite-project/dist  
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build  
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+          path: dist  
 
       - name: Deploy to Render
         env:
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}  # The Render API key stored in GitHub Secrets
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}   
         run: |
           npm install -g render-cli
-          render deploy static-site --service-id=<srv-cqrj9olumphs73clcsvg> --dir=dist --api-key=${{ secrets.RENDER_API_KEY }}
+          render deploy static-site --service-id=srv-cqrj9olumphs73clcsvg --dir=dist --api-key=${{ secrets.RENDER_API_KEY }}
