@@ -44,7 +44,7 @@ export default function Projects() {
         
         <li key={project.id}>
             <span   className={styles.card}>
-           {user.id||true?
+           {user.id?
           ( <Link to={`/projects/${project.id}`}>
            <img
                src={project?.picture_url}
@@ -107,8 +107,9 @@ export default function Projects() {
         }
 	return(
         <>
-         {user.id||true&&(<span  
+         {user.id&&(<span  
             onClick={handleCreateModal}
+            style={{ userSelect: 'none', cursor: 'pointer' }}
             className="px-3 py-1 ml-3 font-semibold rounded-md dark:bg-violet-300 dark:text-gray-50 self-right
             over:bg-pink-200 active:bg-pink-100 focus:outline-none focus:ring focus:ring-pink-300">
                 <span>Create New Project +</span>
