@@ -2,21 +2,21 @@
     "root": "dist",
     "routes": [
       {
-        "src": "/style.css",
-        "dest": "/style.css",
+        "src": "/assets/*.css",
+        "dest": "/assets/*.css",
         "headers": {
           "Content-Type": "text/css"
         }
       },
       {
-        "src": "/static/js/*.js",
-        "dest": "/static/js/*.js",
+        "src": "/assets/*.js",
+        "dest": "/assets/*.js",
         "headers": {
           "Content-Type": "application/javascript"
         }
       },
       {
-        "src": "/**",
+        "src": "/.*",
         "dest": "/index.html"
       }
     ]
