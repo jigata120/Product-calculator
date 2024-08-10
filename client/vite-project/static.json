@@ -1,0 +1,24 @@
+{
+    "root": "dist",
+    "routes": [
+      {
+        "src": "/style.css",
+        "dest": "/style.css",
+        "headers": {
+          "Content-Type": "text/css"
+        }
+      },
+      {
+        "src": "/static/js/*.js",
+        "dest": "/static/js/*.js",
+        "headers": {
+          "Content-Type": "application/javascript"
+        }
+      },
+      {
+        "src": "/**",
+        "dest": "/index.html"
+      }
+    ]
+  }
+  
