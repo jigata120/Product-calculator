@@ -10,8 +10,9 @@ export default function Profile({
     const navigate = useNavigate();
      
     useEffect(()=>{
-        if (userId==user[0]){
-            setProfilData(user[1])
+      
+        if (userId==user.id){
+            setProfilData(user)
         }else{
             (async ()=>{
                 const response = await fetch(`http://localhost:8000/api/users/${userId}`)
@@ -56,7 +57,7 @@ export default function Profile({
             />
           
         )}
-        <h3>{profilData?.name}</h3>
+        <h3 style={{textAlign:'center'}}>{profilData?.name}</h3>
         <h6>New York</h6>
         <h4>{profilData?.email}</h4>
           
