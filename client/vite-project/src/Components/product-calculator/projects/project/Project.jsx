@@ -67,7 +67,7 @@ export default function ProjectDetails(){
 				</td>
 				))}
 				<td className="p-3 text-right">
-					<span className="px-3 py-1 font-semibold rounded-md dark:bg-violet-600 dark:text-gray-50">
+					<span style={{ userSelect: 'none', cursor: 'pointer' }}className="px-3 py-1 font-semibold rounded-md dark:bg-violet-600 dark:text-gray-50">
 						<span>Pending</span>
 					</span>
 				</td>
@@ -222,6 +222,7 @@ const handleRemoteSave =async ()=>{
                     <h2 className="project-title text-2xl font-semibold leading-tight">{title}</h2>
                     <span 
                     onClick={handleRemoteSave}
+                    style={{ userSelect: 'none', cursor: 'pointer' }}
                     className="px-3 py-1 font-semibold rounded-md dark:bg-violet-200 dark:text-gray-20 self-right
                     over:bg-pink-200 active:bg-pink-100 focus:outline-none focus:ring focus:ring-pink-300">
                         <span>Remote Save</span>
@@ -254,11 +255,11 @@ const handleRemoteSave =async ()=>{
                             {htmlTableProducts}
                             <tr   className="border border-opacity-60 dark:border-gray-900 dark:bg-gray-50">
                                 <td className="p-3 border-t border-opacity-20 dark:border-gray-500 dark:bg-gray-50">
-                                    <p className="text-center ">{finalProduct} </p>
+                                    <p className="text-left">{finalProduct} </p>
                                 </td>
                                  {CalculatedHtml}
                                 <td className="p-3 text-right border-t border-opacity-20 dark:border-gray-500 dark:bg-gray-50">
-                                    <span className="px-3 py-1 font-semibold rounded-md dark:bg-violet-600 dark:text-gray-50 ">
+                                    <span style={{ userSelect: 'none', cursor: 'pointer' }}className="px-3 py-1 font-semibold rounded-md dark:bg-violet-600 dark:text-gray-50 ">
                                         <span>Pending</span>
                                     </span>
                                 </td>
