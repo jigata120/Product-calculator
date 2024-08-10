@@ -107,12 +107,12 @@ export default function Projects() {
         }
 	return(
         <>
-        <span  
+         {user.id||true&&(<span  
             onClick={handleCreateModal}
             className="px-3 py-1 ml-3 font-semibold rounded-md dark:bg-violet-300 dark:text-gray-50 self-right
             over:bg-pink-200 active:bg-pink-100 focus:outline-none focus:ring focus:ring-pink-300">
                 <span>Create New Project +</span>
-        </span>
+        </span>)}
           {createModal && <CreateProjectModal 
           refreshProjects={refreshProjects}
            setRefreshProjects={setRefreshProjects}
