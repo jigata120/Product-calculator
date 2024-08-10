@@ -23,12 +23,12 @@ export default function Subscriptions(){
             <div className="list-item">
             <div className="list-item-company">
                 <figure className="list-item-company-logo list-item-company-logo--square">
-                <img src="https://assets.codepen.io/285131/netflix-logo.png" />
+                <img src="https://www.zarla.com/images/zarla-funkbox-fiber-1x1-2400x2400-20221115-bdvh3v6xdrkgh6dqjyjr.png?crop=1:1,smart&width=250&dpr=2" />
                 </figure>
                 <div className="list-item-company-info">
-                <h4 className="list-item-company-name">Netflix</h4>
+                <h4 className="list-item-company-name">Internet-companyPack</h4>
                 <a href="#" className="list-item-company-hashtag">
-                    #Entertainment
+                    #Connention
                 </a>
                 </div>
             </div>
@@ -36,13 +36,13 @@ export default function Subscriptions(){
                 <div className="list-item-transaction-values">
                 <span className="list-item-transaction-value">
                     <i className="ph-arrows-clockwise-bold" />
-                    -$7.99
+                    -$47.99
                 </span>
                 <time
                     className="list-item-transaction-time"
-                    dateTime="2020-09-23T16:00:00"
+                    dateTime="2024-09-23T16:00:00"
                 >
-                    September 23, 2020 at 4:00pm
+                    August 3, 2024 at 4:00pm
                 </time>
                 </div>
                 <button className="list-item-transaction-action">
@@ -53,12 +53,12 @@ export default function Subscriptions(){
             <div className="list-item">
             <div className="list-item-company">
                 <figure className="list-item-company-logo list-item-company-logo--square">
-                <img src="https://assets.codepen.io/285131/apple-music.png" />
+                <img src="https://img.freepik.com/free-vector/gradient-code-logo-template_23-2148820807.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1722988800&semt=ais_hybrid" />
                 </figure>
                 <div className="list-item-company-info">
-                <h4 className="list-item-company-name">Apple Music</h4>
+                <h4 className="list-item-company-name">Monitoring</h4>
                 <a href="#" className="list-item-company-hashtag">
-                    #Music
+                    #Software
                 </a>
                 </div>
             </div>
@@ -69,9 +69,9 @@ export default function Subscriptions(){
                 </span>
                 <time
                     className="list-item-transaction-time"
-                    dateTime="2020-09-26T17:00:00"
+                    dateTime="2024-09-26T17:00:00"
                 >
-                    September 26, 2020 at 5:00pm
+                    August 2, 2024 at 5:00pm
                 </time>
                 </div>
                 <button className="list-item-transaction-action">
@@ -82,12 +82,12 @@ export default function Subscriptions(){
             <div className="list-item">
             <div className="list-item-company">
                 <figure className="list-item-company-logo list-item-company-logo--square">
-                <img src="https://assets.codepen.io/285131/aws-logo.png" />
+                <img src="https://img.freepik.com/free-vector/house-rent-concept-background_23-2147779983.jpg" />
                 </figure>
                 <div className="list-item-company-info">
-                <h4 className="list-item-company-name">Amazon AWS</h4>
+                <h4 className="list-item-company-name">Office rent</h4>
                 <a href="#" className="list-item-company-hashtag">
-                    #Hosting
+                    #Rent
                 </a>
                 </div>
             </div>
@@ -98,9 +98,9 @@ export default function Subscriptions(){
                 </span>
                 <time
                     className="list-item-transaction-time"
-                    dateTime="2020-09-27T21:00:00"
+                    dateTime="2024-09-27T21:00:00"
                 >
-                    September 27, 2020 at 9:00pm
+                    August 0, 2024 at 9:00pm
                 </time>
                 </div>
                 <button className="list-item-transaction-action">

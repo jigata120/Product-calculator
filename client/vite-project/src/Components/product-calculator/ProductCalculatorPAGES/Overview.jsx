@@ -4,11 +4,11 @@ export default function Overview(){
     <div className="content-header">
     <div className="content-header-inner">
         <h1 className="content-header-title">
-        Good afternoon Ryan, <br />
+        Good morning, <br />
         you have<small>$24,920.56</small>
         </h1>
         <div className="content-header-info">
-        Available funds to invest: $435.00{" "}
+        Available funds to invest: $4235.00{" "}
         <a href="#" className="link">
             Invest now
         </a>

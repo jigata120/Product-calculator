@@ -17,19 +17,19 @@ export default function Transactions(){
             </header>
             <div className="overview-body">
             <div className="summary">
-                <h3 className="summary-date">Sept 09, 2020</h3>
-                <span className="summary-amount">+$87.01</span>
+                <h3 className="summary-date">June 29, 2024</h3>
+                <span className="summary-amount">+$77.01</span>
             </div>
             <div className="list">
                 <div className="list-item">
                 <div className="list-item-company">
                     <figure className="list-item-company-logo">
-                    <img src="https://assets.codepen.io/285131/spotify-logo.svg" />
+                    <img src="https://cdn-icons-png.flaticon.com/512/8637/8637124.png" />
                     </figure>
                     <div className="list-item-company-info">
-                    <h4 className="list-item-company-name">Spotify</h4>
+                    <h4 className="list-item-company-name">Database tax</h4>
                     <a href="#" className="list-item-company-hashtag">
-                        #Music
+                        #Tax
                     </a>
                     </div>
                 </div>
@@ -37,7 +37,7 @@ export default function Transactions(){
                     <div className="list-item-transaction-values">
                     <span className="list-item-transaction-value">
                         <i className="ph-arrows-clockwise-bold" />
-                        -$9.99
+                        -$19.99
                     </span>
                     <time
                         className="list-item-transaction-time"dateTime="17:00"
@@ -85,15 +85,15 @@ export default function Transactions(){
                 <div className="list-item">
                 <div className="list-item-company">
                     <figure className="list-item-company-logo">
-                    <img src="https://assets.codepen.io/285131/starbucks-logo.svg" />
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/010/533/060/small_2x/house-cleaning-logo-cleaning-service-logo-cleaning-company-logo-house-wash-logo-template-free-vector.jpg" />
                     </figure>
                     <div className="list-item-company-info">
-                    <h4 className="list-item-company-name">Starbucks</h4>
+                    <h4 className="list-item-company-name">CL-cleaning</h4>
                     <a href="#" className="list-item-company-hashtag">
-                        #Food
+                        #Cleaning
                     </a>
                     <a href="#" className="list-item-company-hashtag">
-                        #Coffee
+                        #Tax
                     </a>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ export default function Transactions(){
                 </div>
             </div>
             <div className="summary">
-                <h3 className="summary-date">Sept 08, 2020</h3>
+                <h3 className="summary-date">June 28, 2024</h3>
                 <span className="summary-amount">+$102.76</span>
             </div>
             <div className="list">
@@ -184,12 +184,12 @@ export default function Transactions(){
                 <div className="list-item">
                 <div className="list-item-company">
                     <figure className="list-item-company-logo">
-                    <img src="https://assets.codepen.io/285131/whole-foods-logo.png" />
+                    <img src="https://img.freepik.com/free-photo/photorealistic-scene-with-warehouse-logistics-operations_23-2151468917.jpg?size=338&ext=jpg&ga=GA1.1.44546679.1716681600&semt=ais_user" />
                     </figure>
                     <div className="list-item-company-info">
-                    <h4 className="list-item-company-name">Whole Foods</h4>
+                    <h4 className="list-item-company-name">Stock refill</h4>
                     <a href="#" className="list-item-company-hashtag">
-                        #Groceries
+                        #Stock
                     </a>
                     </div>
                 </div>
@@ -214,12 +214,12 @@ export default function Transactions(){
                 <div className="list-item">
                 <div className="list-item-company">
                     <figure className="list-item-company-logo">
-                    <img src="https://assets.codepen.io/285131/amc-logo.png" />
+                    <img src="https://images-platform.99static.com//5_RrGQsskUIFD0nJG251i8XYZuo=/174x0:1224x1050/fit-in/500x500/99designs-contests-attachments/107/107631/attachment_107631301" />
                     </figure>
                     <div className="list-item-company-info">
-                    <h4 className="list-item-company-name">AMC Theathers</h4>
+                    <h4 className="list-item-company-name">TWS-shipping</h4>
                     <a href="#" className="list-item-company-hashtag">
-                        #Entertainment
+                        #Shipping
                     </a>
                     </div>
                 </div>
