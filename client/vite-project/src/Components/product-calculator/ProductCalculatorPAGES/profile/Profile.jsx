@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { getData } from "../../../../Api";
 
 export default function Profile({
     user
@@ -15,13 +16,13 @@ export default function Profile({
             setProfilData(user)
         }else{
             (async ()=>{
-                const response = await fetch(`http://localhost:8000/api/users/${userId}`)
+                const data = await getData(`http://localhost:8000/api/users/${userId}/`)
                 if (!response.ok) {
                   navigate('/NotFound')
                 console.log("navigated")
 
                   }
-                const data = await response.json()
+                 
                 setProfilData(data)
                 console.log('GET USER REQUEST');
                 console.log(data)
