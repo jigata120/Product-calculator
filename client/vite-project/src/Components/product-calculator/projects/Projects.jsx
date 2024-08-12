@@ -83,15 +83,20 @@ export default function Projects() {
                 <div className={styles.members}>
                 { project.members.length>0 ?
                 project.members.map((member)=>(
+                    
+                     
+                <Link key={member.id} to={user.id?`user/${member.id}`:''} className={`${styles.member}`}      >
+                   <img
+                       
+                     className={`${styles.card__thumb} `}
+                     src={member.profile_url}
+                     alt={member.name}
+                       />
+                </Link>
+                    
                    
-                    <Link key={member.id} to={`user/${member.id}`} className={`${styles.member}`}      >
-                    <img
-                        
-                      className={`${styles.card__thumb} `}
-                      src={member.profile_url}
-                      alt={member.name}
-                        />
-                    </Link>
+                
+                    
                   
                  
             ))
