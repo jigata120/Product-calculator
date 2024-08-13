@@ -66,7 +66,7 @@ export default function Projects() {
                 <svg className={styles.card__arc} xmlns="http://www.w3.org/2000/svg">
                     <path />
                 </svg>
-                <Link to={`user/${project.owner.id}`} >
+                <Link to={user.id?`user/${project.owner.id}`:''} >
                    
                 <img
                     className={styles.card__thumb}
