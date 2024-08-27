@@ -12,17 +12,10 @@ export default function Profile({
      
     useEffect(()=>{
       
-        if (userId==user.id){
-            setProfilData(user)
-        }else{
+         
             (async ()=>{
                 const data = await getData(`http://localhost:8000/api/users/${userId}/`)
-                if (!response.ok) {
-                  navigate('/NotFound')
-                console.log("navigated")
-
-                  }
-                 
+                console.log(data);
                 setProfilData(data)
                 console.log('GET USER REQUEST');
                 console.log(data)
@@ -30,7 +23,7 @@ export default function Profile({
 
 
             })()
-        }
+        
     },[])
 
     console.log(profilData?.role);
